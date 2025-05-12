@@ -5,11 +5,15 @@ import os
 
 app = Flask(__name__)
 
-TELEGRAM_TOKEN = os.getenv("7598964683:AAE4BFqHIXcFRhkVNzbF1d42LAmNX6jfvGY")  # Ambil dari Environment Variables
-CHAT_ID = os.getenv("789995815")
+TELEGRAM_TOKEN = os.getenv("7631244427:AAE5VXJqR_nwNek3ABaIZgM9WNDMAFichxw")
+CHAT_ID = os.getenv("78999815")
+SECRET_KEY = os.getenv("112552#Root")  # Untuk autentikasi
 
 @app.route('/notify', methods=['POST'])
 def notify():
+    if request.headers.get('X-Secret-Key') != SECRET_KEY:
+        return "Unauthorized", 401
+    
     message = request.json.get("message")
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
     payload = {
