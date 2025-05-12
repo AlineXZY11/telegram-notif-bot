@@ -1,0 +1,11 @@
+name: Notify Telegram
+on: push
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Kirim Notifikasi
+        run: |
+          curl -X POST ${{ secrets.https://telegram-notif-bot-iv1o.onrender.com }}/notify \
+          -H "X-Secret-Key: ${{ secrets.112552#Root }}" \
+          -d '{"message":"🚀 Ada update di repo!"}'
